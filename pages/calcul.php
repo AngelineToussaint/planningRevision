@@ -1,8 +1,9 @@
 <?php
 
 $durees = Database::query(
-    'SELECT matiere.libelle as matiere, jours.libelle as jour, duree FROM duree, matiere,jours WHERE duree.matiere_id = matiere.id AND duree.jour_id = jours.id AND matiere.utilisateur_id = '.$_SESSION['utilisateur']['id']
-);
+    'SELECT matiere.libelle as matiere, jours.libelle as jour, duree FROM duree, matiere,jours WHERE duree.matiere_id = matiere.id AND duree.jour_id = jours.id AND matiere.utilisateur_id = ?', [
+            $_SESSION['utilisateur']['id']
+    ]);
 
 if (count($durees) == 0) {
     calcul();

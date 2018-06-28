@@ -3,7 +3,9 @@
 <div class="tableauDeBord">
 <?php
 // Récupèrer la liste des matières pour l'utilisateur connecté (grâce à la session 'utilisateur')
-$matières = Database::query('SELECT * FROM matiere WHERE utilisateur_id = '. $_SESSION['utilisateur']['id']);
+$matières = Database::query('SELECT * FROM matiere WHERE utilisateur_id = ?', [
+        $_SESSION['utilisateur']['id']
+]);
 
 // Si il y a des matières on les affiche (si le nombre de matières est supérieur à 0)
 if (count($matières) > 0){

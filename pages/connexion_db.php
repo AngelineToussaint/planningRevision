@@ -5,7 +5,9 @@ $mdp = $_POST['mdp'];
 
 $connexion = false;
 if (!empty($email) && !empty($mdp)) {
-    $check = Database::query("SELECT * FROM utilisateurs WHERE email = '". $email ."' AND mdp = '". sha1($mdp) ."'");
+    $check = Database::query('SELECT * FROM utilisateurs WHERE email = ? AND mdp = ?', [
+        $email, sha1($mdp)
+    ]);
 
     if (count($check) == 1) {
         $connexion = true;

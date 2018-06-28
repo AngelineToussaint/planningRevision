@@ -39,7 +39,9 @@ function redirect($page) {
 function calcul() {
     $formatId = $_SESSION['utilisateur']['format_id'];
 
-    $matieres = Database::query('SELECT * FROM matiere WHERE utilisateur_id = '. $_SESSION['utilisateur']['id']);
+    $matieres = Database::query('SELECT * FROM matiere WHERE utilisateur_id = ?', [
+        $_SESSION['utilisateur']['id']
+    ]);
         
     if ($formatId == 1) {
         format1($matieres);
@@ -60,7 +62,7 @@ function format1($matieres) {
 
         $jour = $i + 1;
         Database::exec(
-            'INSERT INTO duree(jour_id, matiere_id, duree) VALUES ('.$jour.', '.$matieres[$i]['id'].', '.$dureeTravail.')'
+            'INSERT INTO duree(jour_id, matiere_id, duree) VALUES (?, ?, ?)',[$jour, $matieres[$i]['id'], $dureeTravail]
         );
     }
 }
@@ -106,5 +108,5 @@ function trouveDureeTravail($coef) {
  * @param $idMatiere
  */
 function suppressionDuree($idMatiere) {
-    Database::exec('DELETE FROM duree WHERE matiere_id = '.$idMatiere);
+    Database::exec('DELETE FROM duree WHERE matiere_id = ?',[$idMatiere]);
 }
