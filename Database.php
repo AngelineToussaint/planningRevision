@@ -41,11 +41,13 @@ class Database
     /**
      * Create a query to fetch (retrieve) data from the DB
      * @param $statement string
+     * @param array $params
      * @return array
      */
-    public static function query($statement)
+    public static function query($statement, $params = [])
     {
-        $q = self::_getPdo()->query($statement);
+        $q = self::_getPdo()->prepare($statement);
+        $q->execute($params);
         return $q->fetchAll(\PDO::FETCH_ASSOC);
     }
 
@@ -54,9 +56,9 @@ class Database
      * @param $statement string
      * @return array
      */
-    public static function queryFirst($statement)
+    public static function queryFirst($statement, $params = [])
     {
-        $res = self::query($statement);
+        $res = self::query($statement, $params);
         if (count($res) > 0) {
             return $res[0];
         } else {
@@ -71,8 +73,8 @@ class Database
      * @param $params array
      * @return int
      */
-    public static function exec($statement)
-    {
-        return self::_getPdo()->exec($statement);
+    public static function exec($statement, $params = []){
+        $q = self::_getPdo()->prepare($statement);
+        return $q->execute($params);
     }
 }
