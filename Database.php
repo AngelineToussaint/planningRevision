@@ -29,7 +29,7 @@ class Database
         return self::$_pdo;
     }
 
-    /**
+    /** 
      * Get the id of the last insert
      * @return int
      */
