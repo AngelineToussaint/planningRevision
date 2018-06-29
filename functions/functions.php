@@ -42,6 +42,10 @@ function calcul() {
     $matieres = Database::query('SELECT * FROM matiere WHERE utilisateur_id = ?', [
         $_SESSION['utilisateur']['id']
     ]);
+
+    foreach ($matieres as $matiere) {
+        suppressionDuree($matiere['id']);
+    }
         
     if ($formatId == 1) {
         format1($matieres);
