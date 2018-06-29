@@ -10,7 +10,12 @@ $matieres = Database::query('SELECT * FROM matiere WHERE utilisateur_id = ?', [
 // Si il y a des matières on les affiche (si le nombre de matières est supérieur à 0)
 if (count($matieres) > 0){
     ?>
-    <a href="?page=calcul" class="calcul bold pointer">Calculer le temps de révision</a>
+    <p>
+        <a href="?page=calcul" class="calcul bold pointer">Calculer le temps de révision</a>
+    </p>
+    <p>
+        <a href="?page=calculCoef" class="calcul bold pointer">Calculer le résultat</a>
+    </p>
 
     <table>
         <thead>

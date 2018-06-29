@@ -46,6 +46,14 @@ function route(){
             include 'pages/calcul_db.php';
             break;
 
+        case $page == 'calculCoef' && checkConnexion():
+            include 'pages/calculCoef.php';
+            break;
+
+        case $page == 'calculCoef_db' && checkConnexion():
+            include 'pages/calculCoef_db.php';
+            break;
+
         case $page == 'deconnexion' && checkConnexion():
             include 'pages/deconnexion.php';
             break;

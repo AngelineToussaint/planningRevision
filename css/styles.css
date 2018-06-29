@@ -59,20 +59,23 @@ input[type=submit], button {
 }
 
 /*Tableau de bord*/
-.tableauDeBord table{
+.tableauDeBord table, .calculCoef table{
     margin-top: 10px;
     width: 100%;
 }
 
-.tableauDeBord input[type=text]{
+.tableauDeBord input[type=text], .calculCoef input[type=text]{
     margin: 10px 15px;
 }
 
-.tableauDeBord td, .tableauDeBord th{
+.tableauDeBord td, .tableauDeBord th, .calculCoef td, .calculCoef th{
     width: 50%;
 }
 
-.tableauDeBord .calcul {color: #333333;}
+.tableauDeBord .calcul{
+    color: #333333;
+    }
+    
 .tableauDeBord .suppression {margin: 2px;}
 
 /*calcul*/
