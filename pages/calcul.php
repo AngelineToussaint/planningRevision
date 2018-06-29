@@ -36,12 +36,12 @@ if (count($durees) == 0) {
     <tbody>
     <?php
     // Boucle sur toutes les durée (affiche la durée, le libelle et le jour)
-    for ($i = 0; $i < count($durees); $i++) {
+    foreach ($durees as $duree){
         ?>
         <tr>
-            <td><?php echo $durees[$i]['matiere'] ?></td>
-            <td><?php echo $durees[$i]['duree'] ?>h</td>
-            <td><?php echo $durees[$i]['jour'] ?></td>
+            <td><?php echo $duree['matiere'] ?></td>
+            <td><?php echo $duree['duree'] ?>h</td>
+            <td><?php echo $duree['jour'] ?></td>
         </tr>
         <?php
     }

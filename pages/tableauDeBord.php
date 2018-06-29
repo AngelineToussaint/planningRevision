@@ -3,12 +3,12 @@
 <div class="tableauDeBord">
 <?php
 // Récupèrer la liste des matières pour l'utilisateur connecté (grâce à la session 'utilisateur')
-$matières = Database::query('SELECT * FROM matiere WHERE utilisateur_id = ?', [
+$matieres = Database::query('SELECT * FROM matiere WHERE utilisateur_id = ?', [
         $_SESSION['utilisateur']['id']
 ]);
 
 // Si il y a des matières on les affiche (si le nombre de matières est supérieur à 0)
-if (count($matières) > 0){
+if (count($matieres) > 0){
     ?>
     <a href="?page=calcul" class="calcul bold pointer">Calculer le temps de révision</a>
 
@@ -29,15 +29,15 @@ if (count($matières) > 0){
         <tbody>
         <?php
         // Boucle sur toutes les matières (affiche le libelle, le coef ainsi qu'un bouton supprimer qui cible son id)
-        for ($i = 0; $i < count($matières); $i++) {
+        foreach ($matieres as $matiere) {
             ?>
             <tr>
-                <td><?php echo $matières[$i]['libelle'] ?></td>
-                <td><?php echo $matières[$i]['coef'] ?></td>
+                <td><?php echo $matiere['libelle'] ?></td>
+                <td><?php echo $matiere['coef'] ?></td>
                 <td>
                     <!-- La page ciblée est tableauDeBord_db avec comme type, la suppression
                     et comme id, l'id de la matière sur laquel nous sommes dans la boucle -->
-                    <form method="post" action="?page=tableauDeBord_db&type=suppression&id=<?php echo $matières[$i]['id'] ?>">
+                    <form method="post" action="?page=tableauDeBord_db&type=suppression&id=<?php echo $matiere['id'] ?>">
                         <button class="suppression">
                             <img id="supprimer-matiere" src="img/recycling.png" class="bold pointer">
                         </button>
@@ -47,14 +47,13 @@ if (count($matières) > 0){
             </tr>
             <?php
         }
-
         ?>
         </tbody>
     </table>
 
     <!-- La page ciblée est tableauDeBord_db avec comme type, l'ajout -->
     <?php
-    if (count($matières) < 7) {
+    if (count($matiere) < 7) {
         ?>
         <form  method="post" action="?page=tableauDeBord_db&type=ajout">
             <input type="text" name="matiere[]" placeholder="Matière">

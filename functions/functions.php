@@ -2,8 +2,8 @@
 
 function getFormats(){
     $formats = Database::query("SELECT * FROM format");
-    for($i=0; $i<count($formats); $i++){
-        echo '<option value="'.$formats[$i]["id"].'">'.$formats[$i]["titre"].'</option>';
+    foreach ($formats as $format) {
+        echo '<option value="'.$format["id"].'">'.$format["titre"].'</option>';
     }
 }
 
@@ -57,12 +57,12 @@ function calcul() {
  * @param $matieres
  */
 function format1($matieres) {
-    for ($i = 0; $i < count($matieres); $i++) {
-        $dureeTravail = trouveDureeTravail($matieres[$i]['coef']);
+    foreach ($matieres as $key => $matiere) {
+        $dureeTravail = trouveDureeTravail($matiere['coef']);
 
-        $jour = $i + 1;
+        $jour = $key + 1;
         Database::exec(
-            'INSERT INTO duree(jour_id, matiere_id, duree) VALUES (?, ?, ?)',[$jour, $matieres[$i]['id'], $dureeTravail]
+            'INSERT INTO duree(jour_id, matiere_id, duree) VALUES (?, ?, ?)',[$jour, $matiere['id'], $dureeTravail]
         );
     }
 }

@@ -38,9 +38,9 @@ if ($_GET['type'] == 'ajout'){
             $_SESSION['utilisateur']['id']
         ]);
 
-        for ($i = 0; $i < count($matieres); $i++) {
+        foreach ($matieres as $matiere) {
             // Supprime la durée correspondant à la matière ($i)
-            suppressionDuree($matieres[$i]['id']);
+            suppressionDuree($matiere['id']);
         }
 
         // Supprime toutes les matières
